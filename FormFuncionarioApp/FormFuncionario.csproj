@@ -16,6 +16,7 @@
     <PackageReference Include="Syncfusion.Blazor.Inputs" Version="24.1.41" />
     <PackageReference Include="Syncfusion.Blazor.Notifications" Version="24.1.41" />
     <PackageReference Include="Syncfusion.Blazor.Popups" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.Blazor.Spinner" Version="24.1.41" />
     <PackageReference Include="Syncfusion.Blazor.Themes" Version="24.1.41" />
   </ItemGroup>
 

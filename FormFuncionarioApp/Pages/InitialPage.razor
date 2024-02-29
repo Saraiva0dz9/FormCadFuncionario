@@ -39,7 +39,7 @@
                     <br>
                     <div>
                         <h3>Data de nascimento:</h3>
-                        <SfDatePicker @bind-Value="@funcionario.DataNacimento" EnableMask="true" TValue="DateTime?" Placeholder="Insira a data de nescimento">
+                        <SfDatePicker Readonly="@IsDialogEditable" @bind-Value="@funcionario.DataNacimento" EnableMask="true" TValue="DateTime?" Placeholder="Insira a data de nescimento">
                             <DatePickerMaskPlaceholder Day="dia" Month="mês" Year="ano"></DatePickerMaskPlaceholder>
                         </SfDatePicker>
                         <ValidationMessage For="@(() => funcionario.DataNacimento)" />
@@ -47,29 +47,30 @@
                     <br>
                     <div>
                         <h3>CPF:</h3>
-                        <SfMaskedTextBox @bind-Value="@funcionario.Cpf" Mask="000.000.000-00"></SfMaskedTextBox>
+                        <SfMaskedTextBox Readonly="@IsDialogEditable" @bind-Value="@funcionario.Cpf" Mask="000.000.000-00"></SfMaskedTextBox>
                         <ValidationMessage For="@(() => funcionario.Cpf)" />
                     </div>
                     <br>
                     <div>
                         <h3>Endereço:</h3>
-                        <SfTextBox @bind-Value="@funcionario.Endereco" Placeholder="Rua..."></SfTextBox>
+                        <SfTextBox Readonly="@IsDialogEditable" @bind-Value="@funcionario.Endereco" Placeholder="Rua..."></SfTextBox>
                         <ValidationMessage For="@(() => funcionario.Endereco)" />
                     </div>
                     <br>
                     <div>
                         <h3>Sexo: </h3>
                         <div>
-                            <SfCheckBox @onchange="@VerifySelectionFirst" Label="Masculino" @bind-Checked="@isCheckedM"></SfCheckBox>
-                            <SfCheckBox @onchange="@VerifySelectionSecond" Label="Feminino" @bind-Checked="@isCheckedF"></SfCheckBox>
+                            <SfCheckBox Disabled="@IsDialogEditable" @onchange="@VerifySelectionFirst" Label="Masculino" @bind-Checked="@isCheckedM"></SfCheckBox>
+                            <SfCheckBox Disabled="@IsDialogEditable" @onchange="@VerifySelectionSecond" Label="Feminino" @bind-Checked="@isCheckedF"></SfCheckBox>
                             <ValidationMessage For="@(() => funcionario.Sexo)" />
                         </div>
                     </div>
                 </div>
                 <br>
                 <div>
-                    <SfButton type="submit" IsPrimary="true">Confirmar</SfButton>
+                    <SfButton Disabled="@IsDialogEditable" type="submit" IsPrimary="true">Confirmar</SfButton>
                 </div>
+                <SfSpinner @bind-Visible="@SpinnerVisible"></SfSpinner>
             </EditForm>
         </Content>
     </DialogTemplates>

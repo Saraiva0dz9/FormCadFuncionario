@@ -16,6 +16,8 @@ namespace FormFuncionario.Pages
         private bool IsDialogCadVisible = false;
         private bool isCheckedM = false;
         private bool isCheckedF = false;
+        private bool SpinnerVisible = false;
+        private bool IsDialogEditable = false;
 
         // Objects
         private Funcionario funcionario = new Funcionario();
@@ -49,6 +51,8 @@ namespace FormFuncionario.Pages
 
         public async Task SalvarCadastro()
         { 
+            this.SpinnerVisible = true;
+            this.IsDialogEditable = true;
             try
             {
                 await _funcionarioService.PostFuncionario(funcionario);
@@ -62,10 +66,14 @@ namespace FormFuncionario.Pages
                     CssClass = "e-toast-danger",
                     Icon = "fa-solid fa-triangle-exclamation"
                 });
+                this.SpinnerVisible = false;
+                this.IsDialogEditable = false;
                 return;
             }
 
+            this.SpinnerVisible = false;
             this.IsDialogCadVisible = false;
+            this.IsDialogEditable = false;
 
             await ToastObj!.ShowAsync(new ToastModel()
             {
