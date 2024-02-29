@@ -25,7 +25,7 @@ namespace FormFuncionario.Services.FuncionarioCadDb
                     );
 
                 if (!response.IsSuccessStatusCode)
-                    throw new Exception("Erro ao tentar cadastrar funcionário");
+                    throw new Exception($"Erro ao tentar cadastrar funcionário '{response.StatusCode}'");
 
             }
             catch (Exception ex)

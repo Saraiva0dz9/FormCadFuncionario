@@ -48,8 +48,22 @@ namespace FormFuncionario.Pages
         }
 
         public async Task SalvarCadastro()
-        {
-            await _funcionarioService.PostFuncionario(funcionario);
+        { 
+            try
+            {
+                await _funcionarioService.PostFuncionario(funcionario);
+            }
+            catch (Exception ex)
+            {
+                await ToastObj!.ShowAsync(new ToastModel()
+                {
+                    Title = "Aviso.",
+                    Content = ex.Message,
+                    CssClass = "e-toast-danger",
+                    Icon = "fa-solid fa-triangle-exclamation"
+                });
+                return;
+            }
 
             this.IsDialogCadVisible = false;
 

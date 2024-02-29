@@ -18,10 +18,17 @@ namespace FormFuncionarioAPI.Controllers
         [HttpPost("postfuncionario")]
         public async Task<ActionResult<Funcionario>> PostFuncionario(Funcionario funcionario)
         {
-            _context.Funcionarios.Add(funcionario);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Funcionarios.Add(funcionario);
+                await _context.SaveChangesAsync();
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
