@@ -1,0 +1,81 @@
+﻿@page "/"
+
+<h3>Olá Seja bem vindo!!</h3>
+
+<p>Para continuar seu cadastro insira o nome do funcionário:</p>
+
+<div>
+    <div>
+        <h3>Nome:</h3>
+        <SfTextBox Width="30%" @bind-Value="@funcionario.FirstName" Placeholder="Insira seu nome"></SfTextBox>
+    </div>
+    <br>
+    <div>
+        <h3>Sobrenome:</h3>
+        <SfTextBox Width="30%" @bind-Value="@funcionario.Sobrenome" Placeholder="Insira seu sobrenome"></SfTextBox>
+    </div>
+    <br>
+    <div>
+        <SfButton OnClick="@OnDialogCadOpen" IsPrimary="true">Continuar</SfButton>
+    </div>
+</div>
+
+
+@*** Dialog Cadastro***@
+<SfDialog Width="600px" Height="600px" Visible="@IsDialogCadVisible" IsModal="true" ShowCloseIcon="true">
+    <DialogEvents OnClose="@OnDialogCadClose"></DialogEvents>
+    <DialogTemplates>
+        <Header>
+            <h3>Prencha com os dados do funcionario:</h3>
+        </Header>
+        <Content>
+            <EditForm Model="@funcionario" OnValidSubmit="@SalvarCadastro">
+                <DataAnnotationsValidator />
+                <div>
+                    <div>
+                        <h3>Nome:</h3>
+                        <SfTextBox Readonly="true" Value="@funcionario.NomeCompleto" Placeholder="Insira o nome"></SfTextBox>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Data de nascimento:</h3>
+                        <SfDatePicker @bind-Value="@funcionario.DataNacimento" EnableMask="true" TValue="DateTime?" Placeholder="Insira a data de nescimento">
+                            <DatePickerMaskPlaceholder Day="dia" Month="mês" Year="ano"></DatePickerMaskPlaceholder>
+                        </SfDatePicker>
+                        <ValidationMessage For="@(() => funcionario.DataNacimento)" />
+                    </div>
+                    <br>
+                    <div>
+                        <h3>CPF:</h3>
+                        <SfMaskedTextBox @bind-Value="@funcionario.Cpf" Mask="000.000.000-00"></SfMaskedTextBox>
+                        <ValidationMessage For="@(() => funcionario.Cpf)" />
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Endereço:</h3>
+                        <SfTextBox @bind-Value="@funcionario.Endereco" Placeholder="Rua..."></SfTextBox>
+                        <ValidationMessage For="@(() => funcionario.Endereco)" />
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Sexo: </h3>
+                        <div>
+                            <SfCheckBox @onchange="@VerifySelectionFirst" Label="Masculino" @bind-Checked="@isCheckedM"></SfCheckBox>
+                            <SfCheckBox @onchange="@VerifySelectionSecond" Label="Feminino" @bind-Checked="@isCheckedF"></SfCheckBox>
+                            <ValidationMessage For="@(() => funcionario.Sexo)" />
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <SfButton type="submit" IsPrimary="true">Confirmar</SfButton>
+                </div>
+            </EditForm>
+        </Content>
+    </DialogTemplates>
+</SfDialog>
+
+@*** Toast Notification ***@
+<SfToast @ref="@ToastObj">
+    <ToastPosition X="Right"></ToastPosition>
+</SfToast>

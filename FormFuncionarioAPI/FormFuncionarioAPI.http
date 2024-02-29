@@ -1,0 +1,6 @@
+@FormFuncionarioAPI_HostAddress = http://localhost:5102
+
+GET {{FormFuncionarioAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
